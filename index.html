@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Captains Log</h1>
+        <div id="submit">
+            <input id="logEntry" type="text">
+            <button id="logButton">Submit</div>
+        </div>
+        <div id="log"></div>
+
+        <script>
+            document.getElementById("logButton").addEventListener("click", function(){
+                log();
+            });
+            document.getElementById("logEntry").addEventListener("keyup", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    log();
+                }
+            }); 
+            function log(){
+                var logContainer = document.getElementById("log");
+                var newLog = document.createElement('div');
+                newLog.innerHTML = "<b>" + new Date().toLocaleString() + "</b> <br>" + 
+                                    document.getElementById("logEntry").value;
+                logContainer.insertBefore(newLog, logContainer.firstChild);
+                document.getElementById("logEntry").value = "";
+                document.getElementById("logEntry").focus(); 
+            }
+        </script>
+    </body>
+</html>
