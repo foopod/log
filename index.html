@@ -3,7 +3,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>Captains Log</h1>
+        <h1>Captain's Log</h1>
         <div id="submit">
             <input id="logEntry" type="text">
             <button id="logButton">Submit</div>
@@ -11,23 +11,52 @@
         <div id="log"></div>
 
         <script>
+            var logList = [];
+            initStorage();
+            
             document.getElementById("logButton").addEventListener("click", function(){
-                log();
+                logEntry();
             });
             document.getElementById("logEntry").addEventListener("keyup", function(event) {
                 if (event.keyCode === 13) {
                     event.preventDefault();
-                    log();
+                    logEntry();
                 }
             }); 
-            function log(){
+            function logEntry(){
+                var entry = document.getElementById("logEntry").value.replace(/<[^>]*>?/gm, '');
+                if(entry.length > 0){
+                    log(entry);
+                }
+            }
+            function log(input){
+                 var logObject = {
+                     "time" : new Date().toLocaleString(),
+                     "entry" : input
+                 }
+                 addToScreen(logObject);
+                 addToStorage(logObject);
+                 
+            }
+            function addToScreen(logObject){
                 var logContainer = document.getElementById("log");
                 var newLog = document.createElement('div');
-                newLog.innerHTML = "<b>" + new Date().toLocaleString() + "</b> <br>" + 
-                                    document.getElementById("logEntry").value;
+                newLog.innerHTML = "<div class='entry'><span class='time'>" + logObject.time + "</span> <br>" + logObject.entry + "</div>";               
                 logContainer.insertBefore(newLog, logContainer.firstChild);
                 document.getElementById("logEntry").value = "";
-                document.getElementById("logEntry").focus(); 
+                document.getElementById("logEntry").focus();
+            }
+            function addToStorage(logObject){
+                logList.push(logObject);
+                localStorage.setItem("log",JSON.stringify(logList));
+            }
+            function initStorage(){
+                if(localStorage.getItem("log")){
+                    logList = JSON.parse(localStorage.getItem("log"));
+                    for(var i = 0; i <logList.length; i++){
+                        addToScreen(logList[i]);
+                    }
+                }
             }
         </script>
     </body>
