@@ -3,13 +3,11 @@
 }
 
 body{
-    max-width:30em;
     margin:auto;
-    padding-top:2em;
+    padding :1em;
 }
 
 input, button{
-    /* width: 100%; */
     padding: 12px 10px;
     margin: 8px 0;
     display: inline;
@@ -17,14 +15,11 @@ input, button{
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 20px;
+    width:100%;
 }
 
 input{
-    width:70%;
-}
-
-button{
-    width: 28%;
+    display:block;
 }
 
 .time{
@@ -33,4 +28,23 @@ button{
 
 .entry{
     margin-bottom:1em;
+}
+
+#log{
+    padding-top:1em;
+}
+
+@media only screen and (min-width: 600px) {
+  body {
+    max-width:30em;
+    max-width:30em;
+  }
+  input{
+    display:inline;
+    width:70%;
+  }
+  button{
+      width: 28%;
+  }
+
 }
