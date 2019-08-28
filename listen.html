@@ -91,7 +91,7 @@
         var yPos = canvas.height - canvas.height*height;
         var width = canvas.width/total;
         var height = canvas.height*height;
-        ctx.fillRect(xPos,yPos,width+1,height);    
+        ctx.fillRect(xPos,yPos,Math.ceil(width),height);    
     }
 
 
