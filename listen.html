@@ -78,6 +78,8 @@
             t.push( given_typed_array[index]);
             
         }
+	ctx.fillStyle ='#FFFFFF';
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
         for(var i = 0; i< t.length; i++){
             drawColumn(i, t.length, t[i]/255);
         }
