@@ -7,7 +7,6 @@
 <body onload="init()">
 
     <p>Volume</p>
-    <input id="volume" type="range" min="0" max="1" step="0.1" value="0.5"/>
     <button id="start">Start</button>
   <div id="log"></div>
     <canvas id="app" style="margin: 0px;position:absolute;top:0;left:0;z-index:-10;"></canvas>
@@ -123,14 +122,6 @@
       microphone_stream.connect(script_processor_node);
 
       // --- enable volume control for output speakers
-
-      document.getElementById('volume').addEventListener('change', function() {
-
-          var curr_volume = this.value;
-          //gain_node.gain.value = curr_volume;
-
-          console.log("curr_volume "+ curr_volume);
-      });
 
       // --- setup FFT
 
