@@ -4,17 +4,28 @@
 
 
 </head>
-<body>
+<body onload="init()">
 
     <p>Volume</p>
     <input id="volume" type="range" min="0" max="1" step="0.1" value="0.5"/>
     <button id="start">Start</button>
   <div id="log"></div>
+    <canvas id="app" style="margin: 0px;"></canvas>
     
     <script type="text/javascript">
 
     var old = console.log;
     var logger = document.getElementById('log');
+        
+        
+        function init(){
+    canvas = document.getElementById('app');
+	ctx = canvas.getContext('2d');
+    resizeCanvas();
+    
+    setInterval(run, 33);
+}
+
     console.log = function (message) {
         if (typeof message == 'object') {
             logger.innerHTML = (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
@@ -62,14 +73,29 @@
         var max_index = num_row_to_display;
 
         
-        var t = "";
+        var t = [];
         for (; index < max_index && index < size_buffer; index += 1) {
 
             //console.log(given_typed_array[index]);
-            t += " " + given_typed_array[index];
+            t.push( given_typed_array[index]);
+            
         }
+        for(var i = 0; i< t.length; i++){
+            drawColumn(i, t.length, t[i]);
+        }
+        
         console.log(t +" "+ label);
     }
+        
+    function drawColumn(number,total,height){
+        ctx.fillStyle ='#000000';
+        var xPos = number * canvas.width/total;
+        var yPos = canvas.height - canvas.height*height;
+        var width = canvas.width/total;
+        var height = canvas.height*height;
+        ctx.fillRect(xPos,yPos,width,height);    
+    }
+
 
     function process_microphone_buffer(event) { // invoked by event loop
 
@@ -131,8 +157,12 @@
             show_some_data(array, 5, "from fft");
         }
       };
+        
     }
-
+function resizeCanvas(e) {
+	canvas.width = document.body.clientWidth;
+	canvas.height = document.body.clientHeight;
+}
 
 </script>
 </body>
