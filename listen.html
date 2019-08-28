@@ -33,19 +33,13 @@
         var audioContext = null;
         
     document.getElementById("start").addEventListener('click', function() {
-
         audioContext = new AudioContext();
-
         console.log("audio is starting up ...");
-
-      
-
-        if (!navigator.getUserMedia)
+        if (!navigator.getUserMedia){
                 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
                               navigator.mozGetUserMedia || navigator.msGetUserMedia;
-
+        }
         if (navigator.getUserMedia){
-
             navigator.getUserMedia({audio:true}, 
               function(stream) {
                   start_microphone(stream);
@@ -55,8 +49,10 @@
               }
             );
 
-        } else { alert('getUserMedia not supported in this browser.'); }
-  };
+        } else { 
+            alert('getUserMedia not supported in this browser.'); 
+        }
+     });
     // ---
         
     function show_some_data(given_typed_array, num_row_to_display, label) {
