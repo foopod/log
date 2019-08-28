@@ -22,8 +22,6 @@
     canvas = document.getElementById('app');
 	ctx = canvas.getContext('2d');
     resizeCanvas();
-    
-    setInterval(run, 33);
 }
 
     console.log = function (message) {
@@ -81,7 +79,7 @@
             
         }
         for(var i = 0; i< t.length; i++){
-            drawColumn(i, t.length, t[i]);
+            drawColumn(i, t.length, t[i]/255);
         }
         
         console.log(t +" "+ label);
