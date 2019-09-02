@@ -86,7 +86,7 @@
     }
         
     function drawColumn(number,total,height){
-        ctx.fillStyle ='#000000';
+        ctx.fillStyle ='hsl('+height+', 100%, 50%);';
         var xPos = number * canvas.width/total;
         var yPos = canvas.height - canvas.height*height;
         var width = canvas.width/total;
